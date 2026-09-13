@@ -14,7 +14,7 @@ export default function PostCard({ post }) {
 
   const author = post.author || {};
   const isBusinessUser = author.role === 'business';
-  
+
   const primaryImage = post.images?.[0] || post.image;
   const hasPrimaryImage = primaryImage && primaryImage.trim() !== '';
 
@@ -23,6 +23,10 @@ export default function PostCard({ post }) {
     if (author._id) {
       navigate(`/business/${author._id}/listings`);
     }
+  };
+
+  const handleAuthorClick = (event) => {
+    event.stopPropagation();
   };
 
   return (
@@ -68,13 +72,18 @@ export default function PostCard({ post }) {
           {author.avatar && (
             <img
               src={author.avatar}
-              alt={author.name}
+              alt={author.username}
               className="w-5 h-5 rounded-full object-cover"
             />
           )}
-          <span className="truncate max-w-[80px]" title={author.name}>
-            By {author.name || 'Unknown'}
-          </span>
+          <Link
+            to={author._id ? `/profile/${author._id}` : '#'}
+            onClick={handleAuthorClick}
+            className="truncate max-w-[80px] hover:text-indigo-600 dark:hover:text-indigo-400 hover:underline"
+            title={author.username}
+          >
+            By {author.username || 'Unknown'}
+          </Link>
           {isBusinessUser && (
             <button
               onClick={handleBusinessClick}

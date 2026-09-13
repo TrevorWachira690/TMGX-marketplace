@@ -16,7 +16,7 @@ export function AuthProvider({ children }) {
 
     api
       .getMe()
-      .then((data) => setUser(data.user))
+      .then((data) => setUser(data))
       .catch(() => {
         localStorage.removeItem('token');
       })
@@ -30,12 +30,12 @@ export function AuthProvider({ children }) {
     return data.user;
   }
 
-  async function register(name, email, password, role, businessType, businessName, whatsappNumber) {
-    const data = await api.register({ 
-      name, 
-      email, 
-      password, 
-      role, 
+  async function register(username, email, password, role, businessType, businessName, whatsappNumber) {
+    const data = await api.register({
+      username,
+      email,
+      password,
+      role,
       businessType,
       businessName: businessName || '',
       whatsappNumber: whatsappNumber || '',

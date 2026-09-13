@@ -7,7 +7,7 @@ export default function Register() {
   const { register } = useAuth();
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    name: '',
+    username: '',
     email: '',
     password: '',
     businessName: '',
@@ -24,7 +24,7 @@ export default function Register() {
     setLoading(true);
     try {
       await register(
-        formData.name,
+        formData.username,
         formData.email,
         formData.password,
         role,
@@ -52,10 +52,11 @@ export default function Register() {
         <form onSubmit={handleSubmit} className="space-y-3">
           <input
             type="text"
-            placeholder="Name"
-            value={formData.name}
-            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+            placeholder="Username"
+            value={formData.username}
+            onChange={(e) => setFormData({ ...formData, username: e.target.value })}
             required
+            minLength={3}
             className="w-full border rounded px-3 py-2 dark:bg-gray-700 dark:border-gray-600"
           />
           <input
@@ -80,7 +81,7 @@ export default function Register() {
             onChange={(e) => {
               setRole(e.target.value);
               setBusinessType('');
-              setFormData({ name: formData.name, email: formData.email, password: formData.password, businessName: '', whatsappNumber: '' });
+              setFormData({ username: formData.username, email: formData.email, password: formData.password, businessName: '', whatsappNumber: '' });
             }}
             className="w-full border rounded px-3 py-2 dark:bg-gray-700 dark:border-gray-600"
           >

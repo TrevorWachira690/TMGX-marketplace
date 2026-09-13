@@ -1,0 +1,10 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Global overrides and custom classes live here or in assets/css/.
+   Student 6 (Styling & Assets) owns this file's custom rules below. */
+
+body {
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
